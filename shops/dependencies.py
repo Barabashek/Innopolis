@@ -1,5 +1,5 @@
-from HomeWorks.shops.db.config import async_session
-from HomeWorks.shops.db.dals.sale_dls import SaleDAL
+from db.config import async_session
+from db.dals.sale_dls import SaleDAL
 
 
 async def get_sale_dal():
