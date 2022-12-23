@@ -1,0 +1,207 @@
+openapi: 3.0.2
+info:
+  title: Отчет по продажам
+  version: 1.0.0
+  description: "API для продаж и отчетов по ним"
+paths:
+  /products/:
+    get:
+      operationId: listItems
+      description: ''
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+      tags:
+      - api
+
+
+  /stores/:
+    get:
+      operationId: listStores
+      description: ''
+
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+          description: ''
+      tags:
+      - api
+
+  /sales/:
+    post:
+      operationId: createSale
+      description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/SalesIn'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOut'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Не корректные данные"
+          description: 'Ответ в случае если пользователь прислал некорректное тело запроса'
+      tags:
+      - api
+
+
+  /stores/top/:
+    get:
+      operationId: listTopStores
+      description: ''
+
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StoreTop'
+          description: ''
+      tags:
+      - api
+
+
+  /products/top/:
+    get:
+      operationId: listTopProduct
+      description: ''
+
+
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductTop'
+          description: ''
+      tags:
+      - api
+
+components:
+  schemas:
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          readOnly: true
+          description: Наименование товарной позиции
+          example: iphone14
+        price:
+          type: number
+          description: Стоимость единицы товара
+          example: 100000
+
+    Store:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        address:
+          type: string
+          readOnly: true
+          description: Адрес магазина
+          example: ул. Мира д. 150
+
+
+    ProductTop:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          readOnly: true
+          description: Наименование товарной позиции
+          example: iphone14
+        sales_amount:
+          type: number
+          description: Общая количество проданных единиц этого товара
+          example: 5000
+
+    StoreTop:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        address:
+          type: string
+          readOnly: true
+          description: Адрес магазина
+          example: ул. Мира д. 150
+        income:
+          type: number
+          description: Общая выручка магазина
+          example: 999999
+
+
+    SalesOut:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        sale_time:
+          type: string
+          readOnly: true
+          example: "2022-12-31 00:00:00"
+        product_id:
+          type: integer
+          description: id проданного товара
+          example: 1
+        store_id:
+          type: integer
+          description: id магазина в котором продан товар
+          example: 1
+
+    SalesIn:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          description: id проданного товара
+          example: 1
+        store_id:
+          type: integer
+          description: id магазина в котором продан товар
+          example: 1
