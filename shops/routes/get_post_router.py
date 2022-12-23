@@ -2,9 +2,9 @@ from typing import List
 
 from fastapi import APIRouter, Depends
 
-from HomeWorks.shops.db.dals.sale_dls import SaleDAL
-from HomeWorks.shops.db.models.models import Product, Store
-from HomeWorks.shops.dependencies import get_sale_dal
+from db.dals.sale_dls import SaleDAL
+from db.models.models import Product, Store
+from dependencies import get_sale_dal
 
 router = APIRouter()
 
