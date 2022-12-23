@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
 
-from HomeWorks.shops.db.config import engine, Base
-from HomeWorks.shops.routes import get_post_router
+from db.config import engine, Base
+from routes import get_post_router
 
 app = FastAPI()
 app.include_router(get_post_router.router)
