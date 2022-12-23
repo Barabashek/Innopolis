@@ -3,7 +3,7 @@ from sqlalchemy import func
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 
-from HomeWorks.shops.db.models.models import Product, Store, Sale
+from db.models.models import Product, Store, Sale
 
 
 class SaleDAL():
