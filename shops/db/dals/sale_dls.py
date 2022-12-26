@@ -25,8 +25,10 @@ class SaleDAL():
         return {"product id": product_id, "store id": store_id}
 
     async def get_top_stores(self) -> List[Store]:
+        diff_date = datetime.datetime.now() - datetime.timedelta(days=30)
         query = await self.db_session.execute(select(Sale.store_id, Store.address, func.sum(Product.price).label('total_amount')).
-                                              join(Store).join(Product).group_by(Store.address).order_by(func.sum(Product.price).desc()).limit(10))
+                                              filter(diff_date < datetime.datetime.now()).join(Store).join(Product).group_by(Store.address).
+                                              order_by(func.sum(Product.price).desc()).limit(10))
         return query.all()
 
     async def get_top_products(self) -> List[Product]:
